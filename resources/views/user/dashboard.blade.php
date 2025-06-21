@@ -78,7 +78,7 @@
           ['icon' => 'fas fa-user-md', 'text' => 'ডক্টর সেবা', 'color' => ['#141e30', '#243b55'], 'link' => '/update'],
           ['icon' => 'fas fa-server', 'text' => 'হোস্টিং ডোমেইন', 'color' => ['#3a7bd5', '#3a6073'], 'link' => '/update'],
           ['icon' => 'fas fa-shopping-basket', 'text' => 'মার্কেটপ্লেস', 'color' => ['#bdc3c7', '#2c3e50'], 'link' => '/update'],
-          ['icon' => 'fas fa-chart-line', 'text' => 'মনিটাইজ সলিউশন', 'color' => ['#f46b45', '#eea849'], 'link' => '/update'],
+          ['icon' => 'fas fa-chart-line', 'text' => 'গ্লোবাল বোনাস', 'color' => ['#f46b45', '#eea849'], 'link' => '/global-bonus'],
         ];
     $isActive = auth()->user()->is_active;
   @endphp

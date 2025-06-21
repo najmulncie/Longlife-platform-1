@@ -30,6 +30,11 @@ use App\Http\Controllers\Admin\GmailSellSettingController;
 use App\Http\Controllers\Admin\GmailSaleController;
 use App\Http\Controllers\UserGmailSaleController;
 
+use App\Http\Controllers\Project\GlobalBonusController;
+
+
+
+
 // ======================
 // ✅ Public Routes
 // ======================
@@ -89,8 +94,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     // Route::get('/activation-requests', [AdminActivationController::class, 'index'])->name('activation.requests');
 
     Route::get('/activation-requests/pending', [AdminActivationController::class, 'pending'])->name('activation.requests.pending');
-Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
-Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
+    Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
+    Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
 
     Route::post('/activation-approve/{id}', [AdminActivationController::class, 'approve'])->name('activation.approve');
     Route::post('/activation-reject/{id}', [AdminActivationController::class, 'reject'])->name('activation.reject');
@@ -135,6 +140,12 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
+
+    Route::get('/global-bonus', [GlobalBonusController::class, 'index'])->name('global-bonus');
+    Route::post('/global-bonus/achieve', [GlobalBonusController::class, 'achieve'])->name('global-bonus.achieve');
+
+
+
 });
 
 
@@ -147,6 +158,11 @@ Route::get('/income-summary', function () {
 Route::get('/update', function () {
     return view('update');
 });
+
+
+
+
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -274,9 +290,9 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::get('/gmail-sales', [GmailSaleController::class, 'index'])->name('gmail.sales.index');
     Route::put('/gmail-sales/{id}/status', [GmailSaleController::class, 'updateStatus'])->name('gmail.sales.status');
 
-Route::get('/gmail-sales/export', [GmailSaleController::class, 'export'])->name('gmail.export');
+    Route::get('/gmail-sales/export', [GmailSaleController::class, 'export'])->name('gmail.export');
 
-Route::put('/gmail-sales/bulk-action', [GmailSaleController::class, 'bulkAction'])->name('gmail.bulkAction');
+    Route::put('/gmail-sales/bulk-action', [GmailSaleController::class, 'bulkAction'])->name('gmail.bulkAction');
 
 
     // Gmail Sales status-wise routes
