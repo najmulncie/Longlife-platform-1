@@ -41,7 +41,17 @@ class IncomeController extends Controller
     public function total()
     {
         $user = Auth::user();
-        $income = $user->balanceLogs()->sum('amount');
+
+        // Main balance income
+        $balanceIncome = $user->balanceLogs()->sum('amount');
+
+        // Bonus income
+        $bonusIncome = DB::table('bonus_histories')
+            ->where('user_id', $user->id)
+            ->sum('amount');
+
+        $income = $balanceIncome + $bonusIncome;
+
         return view('user.income-card', [
             'income' => $income,
             'label' => 'সর্বমোট ইনকাম',
@@ -49,12 +59,23 @@ class IncomeController extends Controller
         ]);
     }
 
+
     private function generateIncomeView($start, $end, $label)
     {
         $user = Auth::user();
-        $income = $user->balanceLogs()
+
+        // Main balance_logs income
+        $balanceIncome = $user->balanceLogs()
             ->whereBetween('created_at', [$start, $end])
             ->sum('amount');
+
+        // Global bonus income from bonus_histories
+        $bonusIncome = DB::table('bonus_histories')
+            ->where('user_id', $user->id)
+            ->whereBetween('created_at', [$start, $end])
+            ->sum('amount');
+
+        $income = $balanceIncome + $bonusIncome;
 
         return view('user.income-card', [
             'income' => $income,

@@ -253,7 +253,8 @@
     document.getElementById("historyTab").classList.add("hidden");
     document.getElementById(tabId).classList.remove("hidden");
   }
-  </script>
+</script>
+
 
 
 
