@@ -34,6 +34,18 @@ use App\Http\Controllers\Project\GlobalBonusController;
 
 
 
+//for admin password reset;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
+
+Route::get('/admin-password-reset', function () {
+    $admin = Admin::where('email', 'nice@gmail.com')->first();
+    $admin->password = Hash::make('nice123'); // যেমনঃ nice123
+    $admin->save();
+    return "Admin password reset successful!";
+});
+
+
 
 // ======================
 // ✅ Public Routes
