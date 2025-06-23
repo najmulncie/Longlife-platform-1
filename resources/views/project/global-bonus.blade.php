@@ -151,6 +151,15 @@
   </style>
 
 
+@if(session('success'))
+  <div class="alert alert-success mt-5">{{ session('success') }}</div>
+@endif
+
+@if(session('error'))
+  <div class="alert alert-danger mt-5">{{ session('error') }}</div>
+@endif
+
+
   <!-- গ্লোবাল বোনাস পেজ -->
  <div id="bonusTab">
   <div class="card">
@@ -179,10 +188,11 @@
       <li>আপনার দ্বিতীয় লেভেলে {{ $required }}টি একটিভ রেফার থাকতে হবে।</li>
     </ul>
 
-    <p>বর্তমানে একটিভ হয়েছে: <span id="activeCount">{{ $activeRefers->count() }}</span> জন</p>
+    <p> বর্তমানে একটিভ হয়েছে: <span id="activeCount">{{ $activeRefers->count() }}</span> জন</p>
     <div class="progress">
       <div class="progress-bar" id="progressBar" style="width: {{ min(($activeRefers->count() / $required) * 100, 100) }}%"></div>
     </div>
+    
     <p>অগ্রগতি: <span id="progressPercent">{{ min(($activeRefers->count() / $required) * 100, 100) }}%</span></p>
 
     <button class="btn" onclick="showTab('referTab')">👥 একটিভ রেফার লিস্ট দেখুন</button>
@@ -193,6 +203,11 @@
         🎯 এচিপ করুন
       </button>
     </form>
+    
+<!--    <p>Active Refers: {{ $activeRefers->count() }}</p>-->
+<!--<p>Required: {{ $required }}</p>-->
+
+    
   </div>
 </div>
 
@@ -220,6 +235,10 @@
       @endforeach
     </tbody>
   </table>
+  
+ 
+  
+  
 </div>
 
 <!-- গ্লোবাল বোনাস হিস্ট্রি পেজ -->

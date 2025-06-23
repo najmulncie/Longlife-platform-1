@@ -32,15 +32,13 @@ use App\Http\Controllers\UserGmailSaleController;
 
 use App\Http\Controllers\Project\GlobalBonusController;
 
-
-
-//for admin password reset;
+//for admin password reset
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
 Route::get('/admin-password-reset', function () {
-    $admin = Admin::where('email', 'nice@gmail.com')->first();
-    $admin->password = Hash::make('nice123'); // যেমনঃ nice123
+    $admin = Admin::where('email', 'ashraful24@gmail.com')->first();
+    $admin->password = Hash::make('@shraful123'); // যেমনঃ admin123
     $admin->save();
     return "Admin password reset successful!";
 });
@@ -106,8 +104,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     // Route::get('/activation-requests', [AdminActivationController::class, 'index'])->name('activation.requests');
 
     Route::get('/activation-requests/pending', [AdminActivationController::class, 'pending'])->name('activation.requests.pending');
-    Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
-    Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
+Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
+Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
 
     Route::post('/activation-approve/{id}', [AdminActivationController::class, 'approve'])->name('activation.approve');
     Route::post('/activation-reject/{id}', [AdminActivationController::class, 'reject'])->name('activation.reject');
@@ -152,12 +150,14 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/wallet', [WalletController::class, 'index'])->name('wallet');
-
+    
+    //for global bonus
     Route::get('/global-bonus', [GlobalBonusController::class, 'index'])->name('global-bonus');
+    #Route::post('/global-bonus/achieve', [GlobalBonusController::class, 'achieve'])->name('global-bonus.achieve');
+
     Route::post('/global-bonus/achieve', [GlobalBonusController::class, 'achieve'])->name('global-bonus.achieve');
-
-
-
+    
+    
 });
 
 
@@ -170,11 +170,6 @@ Route::get('/income-summary', function () {
 Route::get('/update', function () {
     return view('update');
 });
-
-
-
-
-
 
 
 Route::middleware(['auth'])->group(function () {
