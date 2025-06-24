@@ -26,7 +26,7 @@ class ActivationController extends Controller
             'method' => 'required|string',
             'user_number' => 'required|string',
             'transaction_id' => 'required|string',
-            'screenshot' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            // 'screenshot' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // চেক করা ইউজারের কোনো পেন্ডিং রিকোয়েস্ট আছে কিনা
