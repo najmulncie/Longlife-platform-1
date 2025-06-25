@@ -46,7 +46,7 @@
 
         {{-- ইউজারের নাম্বার --}}
         <div class="mb-6">
-            <label for="user_number" class="block text-gray-700 font-semibold mb-2">আপনার নাম্বার (যেখান থেকে টাকা পাঠিয়েছেন)</label>
+            <label for="user_number" class="block text-gray-700 font-semibold mb-2">আপনার নাম্বার (যেখান থেকে টাকা পাঠিয়েছেন) <span style="color: red">*</span></label>
             <input type="text" name="user_number" id="user_number" value="{{ old('user_number') }}" placeholder="আপনার নাম্বার লিখুন" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
             @error('user_number')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -55,7 +55,7 @@
 
         {{-- ট্রানজেকশন আইডি --}}
         <div class="mb-6">
-            <label for="transaction_id" class="block text-gray-700 font-semibold mb-2">ট্রানজেকশন আইডি</label>
+            <label for="transaction_id" class="block text-gray-700 font-semibold mb-2">ট্রানজেকশন আইডি  <span style="color: red">*</span></label>
             <input type="text" name="transaction_id" id="transaction_id" value="{{ old('transaction_id') }}" placeholder="ট্রানজেকশন আইডি লিখুন" required class="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
             @error('transaction_id')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

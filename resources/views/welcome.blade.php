@@ -4,6 +4,12 @@
 
 @section('content')
 
+<style>
+    body {
+        font-family: 'Noto Sans Bengali', sans-serif;
+    }
+</style>
+
     <!-- Hero Banner Section -->
     <section class="bg-gradient-to-br from-indigo-700 to-blue-600 text-white py-10 px-6">
         <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto shadow-xl text-center">

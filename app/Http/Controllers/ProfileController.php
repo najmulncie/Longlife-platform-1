@@ -28,21 +28,20 @@ class ProfileController extends Controller
         $user->mobile = $request->mobile;
         $user->email = $request->email;
 
-       if ($request->hasFile('profile_photo')) {
-    // পুরাতন ছবি ডিলিট করলে ভালো হয়
-    if ($user->profile_photo) {
-        Storage::disk('public')->delete($user->profile_photo);
-    }
+        if ($request->hasFile('profile_photo')) {
+            // পুরাতন ছবি ডিলিট করলে ভালো হয়
+            if ($user->profile_photo) {
+                Storage::disk('public')->delete($user->profile_photo);
+            }
 
-    // ফাইল সেভ করা হচ্ছে public ডিরেক্টরিতে
-    $path = $request->file('profile_photo')->store('profile_photos', 'public');
+        // ফাইল সেভ করা হচ্ছে public ডিরেক্টরিতে
+        $path = $request->file('profile_photo')->store('profile_photos', 'public');
 
-    // path সেভ করা হচ্ছে
-    $user->profile_photo = $path;
-    $user->save();
-}
+        // path সেভ করা হচ্ছে
+        $user->profile_photo = $path;
+        $user->save();
 
-
+        }
         return redirect()->back()->with('success', 'প্রোফাইল আপডেট হয়েছে!');
     }
 }

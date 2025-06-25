@@ -9,10 +9,18 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
 
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+<style>
+    body {
+        font-family: 'Noto Sans Bengali', sans-serif;
+    }
+</style>
+
 </head>
+
 <body class="bg-gray-100 h-screen flex flex-col overflow-hidden">
 
   <!-- Header -->
@@ -35,8 +43,8 @@
 
     <div x-show="open" @click.away="open = false"
          class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50">
-      <a href="{{ route('login') }}" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">🔐 Login</a>
-      <a href="/register" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">📝 Register</a>
+      <a href="{{ route('login') }}" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">🔐 লগিন </a>
+      <a href="/register" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">📝 রেজিষ্টার</a>
     </div>
   </div>
 </header>
@@ -46,7 +54,7 @@
   <div id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-40 flex flex-col">
     {{-- Sidebar Header --}}
     <div class="flex items-center justify-between px-4 py-4 border-b bg-indigo-600 text-white">
-      <h2 class="text-lg font-semibold">Menu</h2>
+      <h2 class="text-lg font-semibold"> মেনু </h2>
       <button id="close-sidebar" class="bg-white text-indigo-600 font-bold rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100">
         &times;
       </button>
@@ -55,11 +63,11 @@
     {{-- Sidebar Links --}}
     <div class="flex-grow overflow-y-auto flex flex-col justify-between">
       <div class="p-4 space-y-4">
-        <a href="{{ url('/') }}" class="hover:text-indigo-600 block">🏠 Home</a>
-        <a href="{{ url('/about') }}" class="hover:text-indigo-600 block">ℹ️ About Us</a>
-        <a href="{{ url('/contact') }}" class="hover:text-indigo-600 block">📞 Support</a>
-        <a href="{{ route('login') }}" class="hover:text-indigo-600 block">🔐 Login</a>
-        <a href="/register" class="hover:text-indigo-600 block">📝 Register</a>
+        <a href="{{ url('/') }}" class="hover:text-indigo-600 block">🏠 হোম </a>
+        <a href="{{ url('/about') }}" class="hover:text-indigo-600 block">ℹ️ আমাদের সম্পর্কে </a>
+        <a href="{{ url('/contact') }}" class="hover:text-indigo-600 block">📞 সাপোর্ট </a>
+        <a href="{{ route('login') }}" class="hover:text-indigo-600 block">🔐 লগিন </a>
+        <a href="/register" class="hover:text-indigo-600 block">📝 রেজিষ্টার </a>
       </div>
 
       {{-- Social Footer --}}

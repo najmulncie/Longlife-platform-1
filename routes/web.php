@@ -29,8 +29,11 @@ use App\Http\Controllers\User\GmailSubmissionController;
 use App\Http\Controllers\Admin\GmailSellSettingController;
 use App\Http\Controllers\Admin\GmailSaleController;
 use App\Http\Controllers\UserGmailSaleController;
-
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Project\GlobalBonusController;
+// use \App\Http\Middleware\UpdateLastSeen;
+
+
 
 //for admin password reset
 use App\Models\Admin;
@@ -52,6 +55,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
 
@@ -64,6 +68,12 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/about', [FrontendController::class, 'index'])->name('about');
+
+
+
+
 
 // ======================
 // ✅ User Routes (auth middleware)
@@ -104,8 +114,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     // Route::get('/activation-requests', [AdminActivationController::class, 'index'])->name('activation.requests');
 
     Route::get('/activation-requests/pending', [AdminActivationController::class, 'pending'])->name('activation.requests.pending');
-Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
-Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
+    Route::get('/activation-requests/approved', [AdminActivationController::class, 'approved'])->name('activation.requests.approved');
+    Route::get('/activation-requests/rejected', [AdminActivationController::class, 'rejected'])->name('activation.requests.rejected');
 
     Route::post('/activation-approve/{id}', [AdminActivationController::class, 'approve'])->name('activation.approve');
     Route::post('/activation-reject/{id}', [AdminActivationController::class, 'reject'])->name('activation.reject');
@@ -178,18 +188,22 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', \App\Http\Middleware\UpdateLastSeen::class])->group(function () {
     Route::get('/user/change-password', [PasswordController::class, 'index'])->name('user.change.password');
     Route::post('/user/change-password', [PasswordController::class, 'update'])->name('user.change.password.update');
+
+    //for referral team controller
+    Route::get('/my-team', [ReferralController::class, 'showLevels']);
+    Route::get('/level/{level}', [ReferralController::class, 'showLevel']);
 });
 
 
 
-Route::get('/level/{level}', [ReferralController::class, 'showLevel'])->middleware('auth');
+// Route::get('/level/{level}', [ReferralController::class, 'showLevel'])->middleware('auth');
 
 
-Route::get('/my-team', [ReferralController::class, 'showLevels'])->middleware('auth');
-Route::get('/level/{level}', [ReferralController::class, 'showLevel'])->middleware('auth');
+// Route::get('/my-team', [ReferralController::class, 'showLevels'])->middleware('auth');
+// Route::get('/level/{level}', [ReferralController::class, 'showLevel'])->middleware('auth');
 
 // routes/web.php
 

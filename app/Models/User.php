@@ -20,6 +20,7 @@ class User extends Authenticatable
         'referred_by',       // যিনি রেফার করেছেন তার user_id
         'referral_code',     // এই ইউজারের নিজস্ব ইউনিক রেফারেল কোড
         'balance',
+        'last_seen',
     ];
 
     // ✅ Hidden attributes
@@ -91,8 +92,17 @@ class User extends Authenticatable
     }
 
     public function gmailSales()
-{
-    return $this->hasMany(\App\Models\GmailSale::class);
-}
+    {
+        return $this->hasMany(\App\Models\GmailSale::class);
+    }
+
+    protected $casts = [
+        'last_seen' => 'datetime',
+    ];
+
+    public function isOnline()
+    {
+        return $this->last_seen !== null && $this->last_seen->gt(now()->subMinutes(1));
+    }
 
 }

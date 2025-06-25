@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\UpdateLastSeen::class,
         ],
 
         'api' => [
@@ -49,7 +50,13 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-    'is_admin' => \App\Http\Middleware\IsAdmin::class,
+        'is_admin' => \App\Http\Middleware\IsAdmin::class,
+        // 'last_seen' => \App\Http\Middleware\UpdateLastSeen::class,
     ];
+
+
+    // protected $middlewareAliases = [
+    // 'last_seen' => \App\Http\Middleware\UpdateLastSeen::class,
+    // ];
 }
 

@@ -1,10 +1,17 @@
 @extends('layout.public')
 
 @section('content')
+
+<style>
+    body {
+        font-family: 'Noto Sans Bengali', sans-serif;
+    }
+</style>
+
 <div class="fixed inset-0 flex items-center justify-center bg-gray-100 px-4">
     <div class="bg-white shadow-xl rounded-xl w-full max-w-md sm:max-w-lg p-6 sm:p-8">
         <div class="text-center mb-6">
-            <h2 class="text-3xl font-bold text-indigo-700">লগইন করুন</h2>
+            <h2 class="text-3xl font-bold text-indigo-700" style="color:rgb(62, 183, 204); ">লগইন করুন</h2>
             <p class="text-gray-500 mt-1 text-base">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
         </div>
 
@@ -48,7 +55,7 @@
             </div>
 
             <button type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg text-base font-semibold transition">
+                  style="background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));"  class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg text-base font-semibold transition ">
                 লগইন করুন
             </button>
         </form>

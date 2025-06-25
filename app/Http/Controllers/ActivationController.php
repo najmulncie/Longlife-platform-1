@@ -27,6 +27,9 @@ class ActivationController extends Controller
             'user_number' => 'required|string',
             'transaction_id' => 'required|string',
             // 'screenshot' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ],[
+            'user_number.required' => 'মোবাইল নম্বর দেওয়া বাধ্যতামূলক।',
+            'transaction_id' => 'ট্রান্সজেকশন আইডি দেওয়া বাধ্যতামূলক।',
         ]);
 
         // চেক করা ইউজারের কোনো পেন্ডিং রিকোয়েস্ট আছে কিনা

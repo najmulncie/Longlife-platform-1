@@ -1,10 +1,8 @@
 @extends('layout.user')
+
 @section('title', 'গ্লোবাল বোনাস প্রজেক্ট')
 
-
 @section('content')
-
-
 
   <style>
     body {
@@ -28,7 +26,7 @@
       background: #fff;
       padding: 20px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 35px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
@@ -99,7 +97,6 @@
     }
 
     .profile {
-      display: flex;
       align-items: center;
       gap: 15px;
       margin-bottom: 10px;

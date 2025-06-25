@@ -25,7 +25,9 @@
       left: 0;
       width: 100%;
       height: 65px;
-      background-color: #007bff;
+      /* background-color: #007bff; */
+      background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));
+
       color: white;
       display: flex;
       align-items: center;
@@ -76,7 +78,7 @@
   transform: scale(1.1);
 }
 
-    .notification-popup {
+.notification-popup {
   display: none;
   position: fixed;
   top: 50%;
@@ -158,7 +160,9 @@
       left: -250px;
       width: 250px;
       height: 100%;
-      background: #0056b3;
+      /* background: #0056b3; */
+      background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));
+
       color: white;
       transition: 0.3s ease-in-out;
       z-index: 1002;
@@ -176,8 +180,11 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 20px;
-      background: #004494;
-      color: #00cfff;
+      /* background: #004494; */
+      background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));
+
+      /* color: #00cfff; */
+      color:rgb(248, 249, 250);
       font-weight: bold;
       font-size: 18px;
       border-bottom: 1px solid #2c3e50;
@@ -379,7 +386,9 @@
       left: 0;
       width: 100%;
       height: 60px;
-      background: #007bff;
+      /* background: #007bff; */
+      background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));
+
       display: flex;
       justify-content: space-around;
       align-items: center;
