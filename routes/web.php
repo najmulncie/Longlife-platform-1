@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\GmailSaleController;
 use App\Http\Controllers\UserGmailSaleController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\VoucharBalanceController;
+use App\Http\Controllers\VoucherTransferController;
+use App\Http\Controllers\Admin\AdminVoucherRequestController;
 use App\Http\Controllers\Project\GlobalBonusController;
 // use \App\Http\Middleware\UpdateLastSeen;
 
@@ -131,6 +133,10 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     // ✅ Resourceful routes for Payment Settings under admin
     Route::resource('payment-settings', PaymentSettingController::class);
+
+    //for Admin Voucher Request
+    Route::get('/voucher-requests', [AdminVoucherRequestController::class, 'index'])->name('admin.voucher-transfer.requests');
+    Route::post('/voucher-requests/{id}/{status}', [AdminVoucherRequestController::class, 'updateStatus'])->name('admin.voucher.transfers.update');
 });
 
 
@@ -215,6 +221,11 @@ Route::middleware(['auth', \App\Http\Middleware\UpdateLastSeen::class])->group(f
     Route::post('/payment/webhook', [VoucharBalanceController::class, 'webhookHandler'])->name('payment.webhook');
     
     Route::get('/voucher/balance', [VoucharBalanceController::class, 'getBalance'])->name('voucher.balance');
+
+    //for vouchar transfer
+    Route::post('/voucher/transfer', [VoucherTransferController::class, 'transfer'])->name('voucher.transfer');
+
+
 
 });
 

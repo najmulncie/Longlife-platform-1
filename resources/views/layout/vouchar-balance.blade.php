@@ -163,10 +163,10 @@
     </div>
   </div>
 
-  <!-- উত্তোলন পেজ -->
+ <!-- ট্রান্সফার  পেজ -->
   <div id="withdraw" class="page hidden">
     <div class="back-button" onclick="goHome()">← ফিরে যান</div>
-    <div class="page-title">ভাউচার ব্যালেন্স উত্তোলন</div>
+    <div class="page-title">ভাউচার  ব্যালেন্স ট্রান্সফার </div>
     <div class="card">
       <label for="method">মাধ্যম</label>
       <select id="method">
@@ -174,11 +174,14 @@
         <option value="বিকাশ">বিকাশ</option>
         <option value="রকেট">রকেট</option>
       </select>
-      <label for="withdrawNumber">নাম্বার</label>
+      <label for="withdrawNumber">নাম্বার <span class="text-danger">*</span></label>
       <input type="text" id="withdrawNumber" maxlength="11" placeholder="নাম্বার" />
-      <label for="withdrawAmount">এমাউন্ট</label>
-      <input type="number" id="withdrawAmount" placeholder="এমাউন্ট (৳)" min="200" max="250000" />
-      <button onclick="confirmWithdraw()">উত্তোলন করুন</button>
+      <label for="withdrawAmount">এমাউন্ট <span class="text-danger">*</span></label>
+      <input type="number" id="withdrawAmount" placeholder="এমাউন্ট (৳)" min="200" max="250000" oninput="calculateCharge()" />
+      <div id="chargeInfo" style="margin-top: 6px; font-size: 14px; color: #555;">
+        চার্জ: ৳ 0 | আপনি পাবেন: ৳ 0
+      </div>
+      <button onclick="confirmWithdraw()"> ট্রান্সফার  করুন</button>
       <p style="font-size:14px;text-align:center;color:#555;margin-top:8px;">সর্বনিম্ন ২০০ এবং সর্বোচ্চ ২৫০,০০০ টাকা। ২% চার্জ প্রযোজ্য।</p>
     </div>
   </div>
@@ -217,7 +220,7 @@
     }
 
     
-    
+    //for confirm pay
    function confirmAdd() {
       const amount = parseInt(document.getElementById('amountInput').value);
       if (isNaN(amount) || amount < 20 || amount > 50000) {
@@ -249,25 +252,61 @@
     }
 
 
-
+    //for confirm transfar/withdraw
     function confirmWithdraw() {
       const amount = parseFloat(document.getElementById('withdrawAmount').value);
       const method = document.getElementById('method').value;
       const number = document.getElementById('withdrawNumber').value.trim();
-      if (!/^\d{11}$/.test(number)) return alert('১১ সংখ্যার সঠিক নাম্বার দিন।');
-      if (isNaN(amount) || amount < 200 || amount > 250000) return alert('২০০ থেকে ২৫০,০০০ টাকার মধ্যে দিন।');
 
-      const charge = amount * 0.02;
-      const received = amount - charge;
-      const status = amount <= totalBalance ? 'সফল ✅' : 'ব্যর্থ ❌';
-      if (amount <= totalBalance) totalBalance -= amount;
-      document.getElementById('balance').textContent = totalBalance;
+      if (!/^\d{11}$/.test(number)) {
+        alert('১১ সংখ্যার সঠিক নাম্বার দিন।');
+        return;
+      }
 
-      withdrawHistory.push({ number, method, amount, charge, received, status, time: new Date().toLocaleString('bn-BD') });
-      alert(`${method} এর মাধ্যমে উত্তোলন ${status}\n৳${amount}`);
-      document.getElementById('withdrawAmount').value = '';
-      document.getElementById('withdrawNumber').value = '';
+      if (isNaN(amount) || amount < 200 || amount > 250000) {
+        alert('২০০ থেকে ২৫০,০০০ টাকার মধ্যে দিন।');
+        return;
+      }
+
+      fetch("{{ route('voucher.transfer') }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({ method, number, amount })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert(data.message);
+          document.getElementById('balance').textContent = data.new_balance;
+          document.getElementById('withdrawAmount').value = '';
+          document.getElementById('withdrawNumber').value = '';
+        } else {
+          alert(data.error || 'সমস্যা হয়েছে!');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('সার্ভারে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+      });
     }
+
+    //for calculate charge
+    function calculateCharge() {
+      const amount = parseFloat(document.getElementById('withdrawAmount').value);
+      const chargeElement = document.getElementById('chargeInfo');
+
+      if (!isNaN(amount) && amount >= 200 && amount <= 250000) {
+        const charge = (amount * 0.02).toFixed(2);
+        const received = (amount - charge).toFixed(2);
+        chargeElement.innerHTML = `চার্জ: ৳${charge} | আপনি পাবেন: ৳${received}`;
+      } else {
+        chargeElement.innerHTML = 'চার্জ: ৳0 | আপনি পাবেন: ৳0';
+      }
+    }
+   
 
     function showWithdrawHistory() {
       const list = document.getElementById('withdrawList');
