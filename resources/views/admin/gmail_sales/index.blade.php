@@ -1,4 +1,4 @@
-@extends('layout.admin') {{-- ধরছি তুমি admin layout use করছ --}}
+@extends('layout.admin') 
 
 @section('content')
 <h1 class="text-2xl font-semibold mb-4">All Gmail Sales</h1>

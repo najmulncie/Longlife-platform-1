@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\GmailSellSettingController;
 use App\Http\Controllers\Admin\GmailSaleController;
 use App\Http\Controllers\UserGmailSaleController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\VoucharBalanceController;
 use App\Http\Controllers\Project\GlobalBonusController;
 // use \App\Http\Middleware\UpdateLastSeen;
 
@@ -185,6 +186,7 @@ Route::get('/update', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+   
 });
 
 
@@ -195,6 +197,25 @@ Route::middleware(['auth', \App\Http\Middleware\UpdateLastSeen::class])->group(f
     //for referral team controller
     Route::get('/my-team', [ReferralController::class, 'showLevels']);
     Route::get('/level/{level}', [ReferralController::class, 'showLevel']);
+
+    //for user vouchar-balance
+    Route::get('/user/vouchar-balance', [VoucharBalanceController::class, 'index'])->name('layout.vouchar-balance');
+    Route::post('/initiate-payment', [VoucharBalanceController::class, 'initiatePayment'])->name('voucher.initiate');
+    
+    Route::get('/cancel', function () {
+        return view('layout.cancel');
+    })->name('payment.cancel');
+
+    Route::get('/success', function () {
+        return view('layout.success');
+    })->name('payment.success');
+
+    Route::get('/payment/verify', [VoucharBalanceController::class, 'verifyPayment'])->name('payment.verify');
+
+    Route::post('/payment/webhook', [VoucharBalanceController::class, 'webhookHandler'])->name('payment.webhook');
+    
+    Route::get('/voucher/balance', [VoucharBalanceController::class, 'getBalance'])->name('voucher.balance');
+
 });
 
 

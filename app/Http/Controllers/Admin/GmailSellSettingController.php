@@ -16,21 +16,22 @@ class GmailSellSettingController extends Controller
     // }
 
     public function index()
-{
-    $setting = \App\Models\GmailSellSetting::first();
+    {
+        $setting = \App\Models\GmailSellSetting::first();
 
-    // যদি রেকর্ড না থাকে, তাহলে নতুন ফাঁকা অবজেক্ট তৈরি করুন যাতে Blade এ error না দেয়
-    if (!$setting) {
-        $setting = new \App\Models\GmailSellSetting();
+        // যদি রেকর্ড না থাকে, তাহলে নতুন ফাঁকা অবজেক্ট তৈরি করুন যাতে Blade এ error না দেয়
+        if (!$setting) {
+            $setting = new \App\Models\GmailSellSetting();
+        }
+
+        return view('admin.gmail_setting', compact('setting'));
     }
-
-    return view('admin.gmail_setting', compact('setting'));
-}
 
 
     public function update(Request $request)
     {
         $data = $request->validate([
+            'recovery_gmail' => 'required',
             'password' => 'required',
             'limit' => 'required|integer',
             'price' => 'required|numeric',

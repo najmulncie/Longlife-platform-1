@@ -14,8 +14,11 @@
         @csrf
         @method('PUT')
 
+      
         <div class="mb-4 flex flex-col items-center">
-            <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('default-avatar.png') }}" class="w-24 h-24 rounded-full object-cover mb-2" alt="Profile Picture">
+            <img src="{{ asset(Auth::user()->profile_photo) }}" class="w-24 h-24 rounded-full object-cover mb-2" alt="Profile photo">
+            <!-- <img src=" {{ asset(Auth::user()->profile_photo) }}" alt="প্রোফাইল ছবি" width="100"> -->
+
             <input type="file" name="profile_photo" class="text-sm text-gray-600">
         </div>
 

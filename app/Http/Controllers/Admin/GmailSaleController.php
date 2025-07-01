@@ -13,50 +13,50 @@ class GmailSaleController extends Controller
 {
 
     public function index()
-{
-    // ডাটাবেজ থেকে gmail_sales ডেটা নিয়ে আসা
-    $gmailSales = GmailSale::orderBy('created_at', 'desc')->get();
+    {
+        // ডাটাবেজ থেকে gmail_sales ডেটা নিয়ে আসা
+        $gmailSales = GmailSale::orderBy('created_at', 'desc')->get();
 
-    // ভিউতে ডেটা পাঠানো
-    return view('admin.gmail_sales.index', compact('gmailSales'));
-}
-
-
-
-public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:pending,checked,rejected,completed',
-    ]);
-
-    $sale = GmailSale::findOrFail($id);
-    $previousStatus = $sale->status;
-
-    $sale->status = $request->status;
-    $sale->save();
-
-    // ✅ যদি নতুন করে completed করা হয়
-    if ($request->status === 'completed' && $previousStatus !== 'completed') {
-        $setting = \App\Models\GmailSellSetting::first();
-
-        if ($setting && $sale->user) {
-            $amount = $setting->price;
-            $user = $sale->user;
-
-            // ব্যালেন্স আপডেট করুন
-            $user->balance += $amount;
-            $user->save();
-
-            // ✅ Balance log insert করুন
-            BalanceLog::create([
-                'user_id' => $user->id,
-                'amount' => $amount,
-            ]);
-        }
+        // ভিউতে ডেটা পাঠানো
+        return view('admin.gmail_sales.index', compact('gmailSales'));
     }
 
-    return back()->with('success', 'Status updated successfully.');
-}
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,checked,rejected,completed',
+        ]);
+
+        $sale = GmailSale::findOrFail($id);
+        $previousStatus = $sale->status;
+
+        $sale->status = $request->status;
+        $sale->save();
+
+        // ✅ যদি নতুন করে completed করা হয়
+        if ($request->status === 'completed' && $previousStatus !== 'completed') {
+            $setting = \App\Models\GmailSellSetting::first();
+
+            if ($setting && $sale->user) {
+                $amount = $setting->price;
+                $user = $sale->user;
+
+                // ব্যালেন্স আপডেট করুন
+                $user->balance += $amount;
+                $user->save();
+
+                // ✅ Balance log insert করুন
+                BalanceLog::create([
+                    'user_id' => $user->id,
+                    'amount' => $amount,
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Status updated successfully.');
+    }
 
 
     // Sales by status

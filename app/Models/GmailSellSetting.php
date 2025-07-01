@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GmailSellSetting extends Model
 {
-    protected $fillable = ['password', 'limit', 'price', 'status'];
+    protected $fillable = ['recovery_gmail', 'password', 'limit', 'price', 'status'];
 }
 

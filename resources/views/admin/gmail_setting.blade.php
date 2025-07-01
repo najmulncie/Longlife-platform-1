@@ -13,7 +13,12 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label class="form-label">🔐 Gmail Password:</label>
+                    <label class="form-label">🔐 Recovery Gmail:</label>
+                    <input type="text" name="recovery_gmail" value="{{ $setting->recovery_gmail ?? '' }}" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">🔑 Gmail Password:</label>
                     <input type="text" name="password" value="{{ $setting->password ?? '' }}" class="form-control" required>
                 </div>
 

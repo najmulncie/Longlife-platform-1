@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title')  LONG LIFE</title>
+  <title>@yield('title')</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -507,28 +507,29 @@
 
     <ul class="sidebar-menu">
   <li><a href="{{ route('dashboard') }}"><span class="menu-text"><i class="fas fa-home"></i> হোম</span><span class="arrow">&gt;</span></a></li>
+  <li><a href="{{ route('layout.vouchar-balance') }}"><span class="menu-text"><i class="fas fa-home"></i> ভাউচার ব্যালেন্স </span><span class="arrow">&gt;</span></a></li>
 
    <!-- Settings Dropdown -->
-<li class="has-submenu">
-  <a href="javascript:void(0);" onclick="toggleSubMenu(this)">
-    <span class="menu-text"><i class="fas fa-cog"></i> সেটিংস</span>
-    <span class="arrow">▾</span>
-  </a>
-  <ul class="submenu">
-    <li>
-      <a href="/profile">
-        <span class="menu-text"><i class="fas fa-user"></i> প্রোফাইল</span>
-        <span class="arrow">&gt;</span>
-      </a>
-    </li>
-    <li>
-      <a href="{{ route('user.change.password') }}">
-        <span class="menu-text"><i class="fas fa-key"></i> পাসওয়ার্ড চেঞ্জ</span>
-        <span class="arrow">&gt;</span>
-      </a>
-    </li>
-  </ul>
-</li>
+  <li class="has-submenu">
+    <a href="javascript:void(0);" onclick="toggleSubMenu(this)">
+      <span class="menu-text"><i class="fas fa-cog"></i> সেটিংস</span>
+      <span class="arrow">▾</span>
+    </a>
+    <ul class="submenu">
+      <li>
+        <a href="/profile">
+          <span class="menu-text"><i class="fas fa-user"></i> প্রোফাইল</span>
+          <span class="arrow">&gt;</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{ route('user.change.password') }}">
+          <span class="menu-text"><i class="fas fa-key"></i> পাসওয়ার্ড চেঞ্জ</span>
+          <span class="arrow">&gt;</span>
+        </a>
+      </li>
+    </ul>
+  </li>
 
   <li><a href="/update"><span class="menu-text"><i class="fas fa-question-circle"></i> হেল্প সেন্টার</span><span class="arrow">&gt;</span></a></li>
   <li><a href="https://t.me/longlife_network"><span class="menu-text"><i class="fab fa-telegram"></i> টেলিগ্রাম গ্রুপ</span><span class="arrow">&gt;</span></a></li>

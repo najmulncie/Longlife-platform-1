@@ -1,5 +1,7 @@
 @extends('layout.gmail')
 
+@section('title', 'Gmail Setting')
+
 @section('content')
 <div class="container my-1">
 
@@ -9,7 +11,7 @@
             কেউ ফেক বা ভুল জিমেইল সাবমিট করবেন না<br>
          জিমেইলের কাজ শিখতে "JOIN" বাটনে ক্লিক করুন. ॥
         </p>
-        <a href="https://t.me/gmail_training" class="btn btn-primary px-4 fw-bold">Join</a>
+        <a href="https://t.me/longlifegmailsell" class="btn btn-primary px-4 fw-bold">Join</a>
     </div>
 
     @if(isset($setting) && $setting->status)
@@ -23,19 +25,28 @@
             </div>
 
             {{-- আজকের পাসওয়ার্ড (নীল বক্সের ভিতরে) --}}
-            <div class="text-center mb-4" style="background-color: #0057FF; color: white; border-radius: 6px; padding: 12px; position: relative;">
-                আজকের পাসওয়ার্ড:
-                <strong id="todayPassword">{{ '' . $setting->password }}</strong>
-                <!--<button onclick="copyPassword()" style="background: none; border: none; position: absolute; right: 10px; top: 10px;">-->
-                <!--    <img src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" alt="Copy" width="20" />-->
-                <!--</button>-->
-                
-                <!-- Font Awesome যুক্ত থাকলে এই বাটন ব্যবহার করুন -->
-<button onclick="copyPassword()" style="background: none; border: none; position: absolute; right: 10px; top: 10px;">
-    <i class="fas fa-copy" style="font-size: 20px;"></i>
-</button>
+            <div class="text-center mb-4" style="background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140)); color: white; border-radius: 6px; padding: 12px; position: relative;">
+
+                <div style="margin-bottom: 10px; position: relative;">
+                    আজকের পাসওয়ার্ড:
+                    <strong id="todayPassword">{{ $setting->password }}</strong>
+                    <button onclick="copyToClipboard('todayPassword')" 
+                            style="background: none; border: none; position: absolute; right: 10px; top: 0;">
+                        📋
+                    </button>
+                </div>
+
+                <div style="position: relative;">
+                    রিকোভারি জিমেইল:
+                    <strong id="recoveryGmail">{{ $setting->recovery_gmail }}</strong>
+                    <button onclick="copyToClipboard('recoveryGmail')" 
+                            style="background: none; border: none; position: absolute; right: 10px; top: 0;">
+                        📋
+                    </button>
+                </div>
 
             </div>
+
 
             <form method="POST" action="{{ route('user.gmail.submit') }}">
                 @csrf
@@ -50,7 +61,7 @@
                     <input type="text" name="gmail_password" id="gmail_password" class="form-control form-control-lg" required placeholder="Gmail পাসওয়ার্ড লিখুন">
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 btn-lg fw-semibold">সাবমিট করুন</button>
+                <button type="submit" style="background-image: linear-gradient(to right,rgb(139, 202, 245),rgb(130, 151, 140));" class="btn btn-primary w-100 btn-lg fw-semibold">সাবমিট করুন</button>
             </form>
         </div>
     @else
@@ -73,11 +84,14 @@
 
 {{-- কপি করার জন্য JS --}}
 <script>
-    function copyPassword() {
-        const password = document.getElementById('todayPassword').innerText;
-        navigator.clipboard.writeText(password).then(function () {
-            alert('Password copied!');
+    function copyToClipboard(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(function () {
+            alert('কপি সফল হয়েছে!');
+        }).catch(function () {
+            alert('কপি করা যায়নি!');
         });
     }
 </script>
+
 @endsection

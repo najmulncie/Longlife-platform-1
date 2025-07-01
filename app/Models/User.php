@@ -21,6 +21,7 @@ class User extends Authenticatable
         'referral_code',     // এই ইউজারের নিজস্ব ইউনিক রেফারেল কোড
         'balance',
         'last_seen',
+        'voucher_balance'
     ];
 
     // ✅ Hidden attributes
