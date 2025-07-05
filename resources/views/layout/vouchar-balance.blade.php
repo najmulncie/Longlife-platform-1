@@ -143,8 +143,12 @@
     <div class="menu-item" onclick="goToPage('withdraw')">
       <div class="left"><div class="icon">📤</div><div class="text">ভাউচার ব্যালেন্স উত্তোলন করুন</div></div><div class="arrow">➔</div>
     </div>
-    <div class="menu-item" onclick="goToPage('withdrawHistory')">
-      <div class="left"><div class="icon">📜</div><div class="text">ভাউচার ব্যালেন্স | উত্তোলনের হিস্ট্রি</div></div><div class="arrow">➔</div>
+    <div class="menu-item">
+      <div class="left"><div class="icon">📜</div><div class="text">
+          <a href="{{ route('voucher.transfer.history') }}"> 
+          ভাউচার ব্যালেন্স | ট্রান্সফারের হিস্ট্রি
+          </a>
+      </div></div><div class="arrow">➔</div>
     </div>
     <div class="menu-item" onclick="goToPage('transaction')">
       <div class="left"><div class="icon">📊</div><div class="text">ভাউচার ব্যালেন্স | ট্রানজেকশন হিস্ট্রি</div></div><div class="arrow">➔</div>
@@ -186,10 +190,10 @@
     </div>
   </div>
 
-  <!-- উত্তোলনের হিস্ট্রি -->
+  <!-- ট্রান্সফারের হিস্ট্রি -->
   <div id="withdrawHistory" class="page hidden">
     <div class="back-button" onclick="goHome()">← ফিরে যান</div>
-    <div class="page-title">ভাউচার ব্যালেন্স | উত্তোলনের হিস্ট্রি</div>
+    <div class="page-title">ভাউচার ব্যালেন্স | ট্রান্সফারের হিস্ট্রি</div>
     <div id="withdrawList"></div>
   </div>
 
@@ -221,7 +225,7 @@
 
     
     //for confirm pay
-   function confirmAdd() {
+    function confirmAdd() {
       const amount = parseInt(document.getElementById('amountInput').value);
       if (isNaN(amount) || amount < 20 || amount > 50000) {
         alert('২০ থেকে ৫০,০০০ এর মধ্যে একটি এমাউন্ট দিন।');

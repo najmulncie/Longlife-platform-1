@@ -419,9 +419,9 @@
 
     
 
-    .content {
+    /* .content {
       padding: 20px;
-    }
+    } */
   </style>
   
   <style>
@@ -446,7 +446,7 @@
 <body>
 
   <div class="main-header">
-    <div style="display: flex; align-items: center; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 12px; top-0">
       <i class="fas fa-bars menu-toggle" onclick="toggleSidebar()"></i>
       <span class="app-title">LONG LIFE</span>
     </div>

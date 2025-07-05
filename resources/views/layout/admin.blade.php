@@ -209,7 +209,7 @@
 
                 <!-- 8. Vouchar Balance Transfer Request -->
                 <li>
-                        <button onclick="toggleMenu('vTransferRequestSubmenu', 'vTransferRequestArrow')" class="flex items-center justify-between w-full hover:bg-blue-700 p-2 rounded">
+                    <button onclick="toggleMenu('vTransferRequestSubmenu', 'vTransferRequestArrow')" class="flex items-center justify-between w-full hover:bg-blue-700 p-2 rounded">
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-file-invoice-dollar"></i> V. Transfer Request
                             </div>
@@ -237,9 +237,6 @@
                                     <div class="flex items-center gap-2">
                                         <i class="fas fa-times-circle"></i> T. Rejected Request
                                     </div>
-
-
-
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
@@ -247,6 +244,48 @@
                     </li>   
                 </li>
             
+
+                <!-- 9.0 for driver pack -->
+
+                <li>
+                    <button onclick="toggleMenu('driverPackSubmenu', 'driverpackArrow')" class="flex items-center justify-between w-full hover:bg-blue-700 p-2 rounded">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-file-invoice-dollar"></i> Driver pack
+                            </div>
+                            <i id="driverpackArrow" class="fas fa-chevron-down rotate-down"></i>
+                        </button>
+                        <ul id="driverPackSubmenu" class="ml-6 mt-1 space-y-1 hidden">
+                            <li> 
+                                <a href="{{ route('admin.sim-operators.index') }}" class="flex items-center justify-between hover:bg-blue-800 p-2 rounded">  
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-hourglass-half"></i> Sim operator
+                                    </div>
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.driver-packs.index') }}" class="flex items-center justify-between hover:bg-blue-800 p-2 rounded">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-check-circle"></i> ALl Driver pack
+                                    </div>
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.driver-packs.request') }}" class="flex items-center justify-between hover:bg-blue-800 p-2 rounded">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-times-circle"></i> User Request
+                                    </div>
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>   
+                </li>
+            
+
+
+
                 <li>
                     <a href="/admin/targets" class="flex items-center justify-between hover:bg-blue-700 p-2 rounded">
                         <div class="flex items-center gap-2">

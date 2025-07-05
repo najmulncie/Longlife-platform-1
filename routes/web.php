@@ -34,6 +34,11 @@ use App\Http\Controllers\VoucharBalanceController;
 use App\Http\Controllers\VoucherTransferController;
 use App\Http\Controllers\Admin\AdminVoucherRequestController;
 use App\Http\Controllers\Project\GlobalBonusController;
+use App\Http\Controllers\Project\DriverPackController;
+
+use App\Http\Controllers\Admin\Project\SimOperatorController;
+use App\Http\Controllers\Admin\Project\AdminDriverPackController;
+
 // use \App\Http\Middleware\UpdateLastSeen;
 
 
@@ -137,6 +142,26 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     //for Admin Voucher Request
     Route::get('/voucher-requests', [AdminVoucherRequestController::class, 'index'])->name('admin.voucher-transfer.requests');
     Route::post('/voucher-requests/{id}/{status}', [AdminVoucherRequestController::class, 'updateStatus'])->name('admin.voucher.transfers.update');
+
+
+    //for admin sim-operator controller routing;
+    Route::get('sim-operators', [SimOperatorController::class, 'index'])->name('admin.sim-operators.index');
+    Route::post('sim-operators', [SimOperatorController::class, 'store'])->name('admin.sim-operators.store');
+    Route::delete('sim-operators/{simOperator}', [SimOperatorController::class, 'destroy'])->name('admin.sim-operators.destroy');
+
+    // for admin driver pack controller routing..
+    Route::get('/driver-packs', [AdminDriverPackController::class, 'index'])->name('admin.driver-packs.index');
+    Route::get('/driver-packs/create', [AdminDriverPackController::class, 'create'])->name('admin.driver-packs.create');
+    Route::post('/driver-packs', [AdminDriverPackController::class, 'store'])->name('admin.driver-packs.store');
+    Route::get('/driver-packs/{driverPack}/edit', [AdminDriverPackController::class, 'edit'])->name('admin.driver-packs.edit');
+    Route::put('/driver-packs/{driverPack}', [AdminDriverPackController::class, 'update'])->name('admin.driver-packs.update');
+    Route::delete('/driver-packs/{driverPack}', [AdminDriverPackController::class, 'destroy'])->name('admin.driver-packs.destroy');
+    
+    Route::get('/driver-packs/request', [AdminDriverPackController::class, 'userDriverPackRequest'])->name('admin.driver-packs.request');
+    Route::post('/admin/driver-pack/approve/{id}', [AdminDriverPackController::class, 'approve'])->name('admin.driver-pack.approve');
+    // Route::get('/admin/driver-pack', [AdminDriverPackController::class, 'index'])->name('admin.driver-pack.index');
+
+
 });
 
 
@@ -174,7 +199,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/global-bonus/achieve', [GlobalBonusController::class, 'achieve'])->name('global-bonus.achieve');
     
-    
+
+    //for  user driver-pack project
+    Route::get('/driver-pack', [DriverPackController::class, 'index'])->name('user.driver-pack');
+    Route::post('/driver-pack/purchase', [DriverPackController::class, 'purchase'])->name('driver-pack.purchase');
+    Route::post('/admin/driver-pack/{id}/approve', [DriverPackController::class, 'approve'])->name('driver-pack.approve');
+    Route::get('/driver-pack/history', [DriverPackController::class, 'history'])->name('driver-pack.history');
+
+
 });
 
 
@@ -224,7 +256,7 @@ Route::middleware(['auth', \App\Http\Middleware\UpdateLastSeen::class])->group(f
 
     //for vouchar transfer
     Route::post('/voucher/transfer', [VoucherTransferController::class, 'transfer'])->name('voucher.transfer');
-
+    Route::get('/voucher-transfer/history', [VoucherTransferController::class, 'voucherTransferHistory'])->name('voucher.transfer.history');
 
 
 });

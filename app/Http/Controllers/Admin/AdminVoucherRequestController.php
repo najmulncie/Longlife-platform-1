@@ -17,6 +17,13 @@ class AdminVoucherRequestController extends Controller
     public function updateStatus($id, $status)
     {
         $transfer = VoucherTransfer::findOrFail($id);
+        
+        if ($status === 'rejected') {
+            $user = $transfer->user; 
+            $user->voucher_balance += $transfer->amount;
+            $user->save();
+        }
+
         $transfer->status = $status;
         $transfer->save();
 

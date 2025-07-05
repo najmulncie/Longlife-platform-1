@@ -22,7 +22,7 @@ class Commission extends Model
 
 public function getMessageAttribute()
 {
-    return "অভিনন্দন! আপনি {$this->level} তম লেভেল থেকে {$this->amount} টাকা রেফারেল কমিশন পেয়েছেন।";
+    return "অভিনন্দন! আপনি {$this->level} তম লেভেল থেকে {$this->amount} টাকা কমিশন পেয়েছেন।";
 }
 
 }

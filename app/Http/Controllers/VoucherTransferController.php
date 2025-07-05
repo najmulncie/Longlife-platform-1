@@ -45,4 +45,26 @@ class VoucherTransferController extends Controller
             'new_balance' => $user->voucher_balance
         ]);
     }
+    
+    public function voucherTransferHistory(Request $request)
+    {
+        // $transfers = VoucherTransfer::where('user_id', auth()->id())
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+        $query = VoucherTransfer::where('user_id', auth()->id());
+
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('number', 'like', "%{$search}%")
+                ->orWhere('method', 'like', "%{$search}%");
+            });
+        }
+
+        $transfers = $query->orderBy('created_at', 'desc')->get();
+
+
+        return view('layout.voucher_transfer_history', compact('transfers'));
+    }
+
 }

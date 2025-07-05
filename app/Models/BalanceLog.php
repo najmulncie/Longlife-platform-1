@@ -11,5 +11,6 @@ class BalanceLog extends Model
         'user_id',
         'amount',
         'type',
+        'description',
     ];
 }

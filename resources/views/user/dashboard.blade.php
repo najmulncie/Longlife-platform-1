@@ -14,7 +14,7 @@
 @endif
 
 @section('content')
-
+  <div style="padding:20px">
 @if(Auth::user()->admin_message)
     <div class="bg-yellow-100 text-yellow-800 p-4 rounded mb-4 shadow flex justify-between items-start">
         <div>
@@ -45,7 +45,7 @@
       @php
         $items = [
           ['icon' => 'fas fa-mobile-alt', 'text' => 'মোবাইল রিচার্জ', 'color' => ['#ff9966', '#ff5e62'], 'link' => '/update'],
-          ['icon' => 'fas fa-car', 'text' => 'ড্রাইভ অফার', 'color' => ['#56ccf2', '#2f80ed'], 'link' => '/update'],
+          ['icon' => 'fas fa-car', 'text' => 'ড্রাইভ অফার', 'color' => ['#56ccf2', '#2f80ed'], 'link' => '/driver-pack'],
           ['icon' => 'fas fa-user', 'text' => 'ড্রাইভ এজেন্ট', 'color' => ['#f7971e', '#ffd200'], 'link' => '/update'],
           ['icon' => 'fas fa-file-invoice-dollar', 'text' => 'পে বিল', 'color' => ['#36d1dc', '#5b86e5'], 'link' => '/update'],
           ['icon' => 'fas fa-store-alt', 'text' => 'অনলাইন শপ', 'color' => ['#00c3ff', '#ffff1c'], 'link' => '/update'],
@@ -103,6 +103,7 @@
     <br><br>
     <button onclick="document.getElementById('inactiveModal').style.display='none'" style="color: #555;">বন্ধ করুন</button>
   </div>
+</div>
 </div>
 
 <script>
