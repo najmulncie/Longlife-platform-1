@@ -87,6 +87,7 @@
     }
     .page {
       animation: fadeIn 0.3s ease-in-out;
+      padding: 20px;
     }
     @keyframes fadeIn {
       from { opacity: 0; }
